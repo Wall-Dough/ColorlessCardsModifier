@@ -1,4 +1,6 @@
 {
   "COLORLESS_CARDS.title": "Colorless Cards",
-  "COLORLESS_CARDS.description": "Colorless cards will now appear in rewards and shops."
+  "COLORLESS_CARDS.description": "Colorless cards will now appear in rewards and shops.",
+  "ULTIMATE_STARTER.title": "Ultimate Starter",
+  "ULTIMATE_STARTER.description": "Replace starter deck with [blue]1[/blue] [gold]{Card1}[/gold], [blue]1[/blue] [gold]{Card2}[/gold], and [blue]8[/blue] [gold]colorless cards[/gold]."
 }

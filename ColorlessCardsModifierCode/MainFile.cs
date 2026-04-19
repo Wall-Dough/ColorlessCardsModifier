@@ -1,8 +1,11 @@
+using System.Collections.ObjectModel;
 using ColorlessCardsModifier.modifiers;
 using Godot;
 using HarmonyLib;
+using MegaCrit.Sts2.Core.Daily;
 using MegaCrit.Sts2.Core.Modding;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Modifiers;
 using MegaCrit.Sts2.Core.Nodes.Screens.MainMenu;
 
 namespace ColorlessCardsModifier.ColorlessCardsModifierCode;
@@ -33,6 +36,28 @@ public partial class MainFile : Node
         private static void AfterGetAllModifiers(ref IEnumerable<ModifierModel> __result)
         {
             __result = __result.AddItem(ModelDb.Modifier<ColorlessCards>().ToMutable());
+            __result = __result.AddItem(ModelDb.Modifier<UltimateStarter>().ToMutable());
+        }
+
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(ModelDb))]
+        [HarmonyPatch("MutuallyExclusiveModifiers", MethodType.Getter)]
+        private static void AfterMutuallyExclusiveModifiers(ref IReadOnlyList<IReadOnlySet<ModifierModel>> __result)
+        {
+            ModifierModel draftModifier = ModelDb.Modifier<Draft>();
+            List<IReadOnlySet<ModifierModel>> newResult = new List<IReadOnlySet<ModifierModel>>();
+            foreach (IReadOnlySet<ModifierModel> set in __result)
+            {
+                IReadOnlySet<ModifierModel> updatedSet = set;
+                if (set.Contains(draftModifier))
+                {
+                    HashSet<ModifierModel> updatingSet = new(set);
+                    updatingSet.Add(ModelDb.Modifier<UltimateStarter>());
+                    updatedSet = new ReadOnlySet<ModifierModel>(updatingSet);
+                }
+                newResult.Add(updatedSet);
+            }
+            __result = newResult.AsReadOnly();
         }
     }
 }
