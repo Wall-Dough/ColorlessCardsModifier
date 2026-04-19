@@ -6,7 +6,7 @@ using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Models.Relics;
 using MegaCrit.Sts2.Core.Runs;
 
-namespace ColorlessCardsModifier.modifiers;
+namespace ColorlessCardsModifier.Modifiers;
 
 public class ColorlessCards : ModifierModel
 {

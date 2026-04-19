@@ -9,7 +9,7 @@ using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.Runs;
 
-namespace ColorlessCardsModifier.modifiers;
+namespace ColorlessCardsModifier.Modifiers;
 
 public class UltimateStarter : ModifierModel
 {

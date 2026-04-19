@@ -1,8 +1,7 @@
 using System.Collections.ObjectModel;
-using ColorlessCardsModifier.modifiers;
+using ColorlessCardsModifier.Modifiers;
 using Godot;
 using HarmonyLib;
-using MegaCrit.Sts2.Core.Daily;
 using MegaCrit.Sts2.Core.Modding;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Modifiers;
