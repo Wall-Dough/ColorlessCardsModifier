@@ -1,6 +1,9 @@
+using ColorlessCardsModifier.modifiers;
 using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Modding;
+using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes.Screens.MainMenu;
 
 namespace ColorlessCardsModifier.ColorlessCardsModifierCode;
 
@@ -19,5 +22,17 @@ public partial class MainFile : Node
         Harmony harmony = new(ModId);
 
         harmony.PatchAll();
+    }
+
+    [HarmonyPatch]
+    public static class ColorlessCardsModifier
+    {
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(NCustomRunModifiersList))]
+        [HarmonyPatch("GetAllModifiers")]
+        private static void AfterGetAllModifiers(ref IEnumerable<ModifierModel> __result)
+        {
+            __result = __result.AddItem(ModelDb.Modifier<ColorlessCards>().ToMutable());
+        }
     }
 }
